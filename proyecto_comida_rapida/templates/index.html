@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultas IA - Restaurante</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h1 class="h3 mb-0">Consultas con IA - Sistema de Restaurante</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <h2 class="h5 mb-3">Realiza tu consulta en lenguaje natural</h2>
+                                <p class="text-muted">Ejemplo: "¿Qué productos tienen menos de 10 unidades en stock?"</p>
+                                
+                                <form id="queryForm" class="needs-validation" novalidate>
+                                    <div class="input-group mb-3">
+                                        <input type="text" id="questionInput" class="form-control form-control-lg" 
+                                               placeholder="Escribe tu pregunta aquí..." required>
+                                        <button class="btn btn-primary" type="submit" id="submitBtn">
+                                            Consultar
+                                        </button>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Por favor, escribe una pregunta.
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        <!-- Indicador de carga -->
+                        <div id="loadingIndicator" class="d-none text-center my-4">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Cargando...</span>
+                            </div>
+                            <p class="mt-2">Procesando tu consulta...</p>
+                        </div>
+                        
+                        <!-- Contenedor para errores -->
+                        <div id="errorContainer" class="alert alert-danger d-none my-3"></div>
+                        
+                        <!-- Contenedor SQL generado -->
+                        <div id="sqlContainer" class="d-none mb-4">
+                            <h3 class="h5 mb-2">Consulta SQL generada:</h3>
+                            <div class="bg-light p-3 rounded">
+                                <pre id="sqlQuery" class="mb-0"></pre>
+                            </div>
+                        </div>
+                        
+                        <!-- Contenedor para el gráfico -->
+                        <div id="chartContainer" class="d-none">
+                            <h3 class="h5 mb-3">Resultados:</h3>
+                            <div class="chart-container" style="position: relative; height:400px; width:100%">
+                                <canvas id="resultsChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <!-- Contenedor para tabla de resultados -->
+                        <div id="tableContainer" class="d-none">
+                            <h3 class="h5 mb-3">Resultados:</h3>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead id="tableHeader">
+                                        <!-- Las columnas se generarán dinámicamente -->
+                                    </thead>
+                                    <tbody id="tableBody">
+                                        <!-- Las filas se generarán dinámicamente -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript principales -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html> 
